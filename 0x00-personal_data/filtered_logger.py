@@ -58,6 +58,7 @@ class RedactingFormatter(logging.Formatter):
                             super(RedactingFormatter, self).format(record),
                             self.SEPARATOR)
 
+
 def get_logger() -> logging.Logger:
     """ Description: Implement a get_logger function that takes no arguments
                      and returns a logging.Logger object.
