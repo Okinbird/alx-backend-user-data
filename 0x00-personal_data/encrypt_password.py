@@ -20,8 +20,8 @@ def hash_password(password: str) -> bytes:
 
 
 def is_valid(hashed_password: bytes, password: str) -> bool:
-    """ Description: Implement an is_valid function that expects 2 arguments and
-                     returns a boolean.
+    """ Description: Implement an is_valid function that expects 2 arguments
+                     and returns a boolean.
 
         Arguments:  hashed_password: bytes type
                     password: string type
