@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ 0. Regex-ing: filter_datum
     1. Log formatter: logging
+    2. Create logger: get_logger
 """
 
 import re
@@ -56,3 +57,18 @@ class RedactingFormatter(logging.Formatter):
         return filter_datum(self.fields, self.REDACTION,
                             super(RedactingFormatter, self).format(record),
                             self.SEPARATOR)
+
+def get_logger() -> logging.Logger:
+    """ Description: Implement a get_logger function that takes no arguments
+                     and returns a logging.Logger object.
+    """
+    log = logging.getLogger('user_data')
+    log.setLevel(logging.INFO)
+    log.propagate = False
+
+    sh = logging.StreamHandler()
+    formatter = RedactingFormatter(PII_FIELDS)
+    sh.setFormatter(formatter)
+    log.addHandler(sh)
+
+    return log
