@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-""" 0. Regex-ing: filter_datum
-    1. Log formatter: logging
-    2. Create logger: get_logger
+""" 0. Regex-ing - filter_datum
+    1. Log formatter - logging
+    2. Create logger - get_logger
     3. Connect to secure database - get_db
+    4. Read and filter data - main
 """
 
 import re
@@ -89,3 +90,30 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     )
 
     return connection_db
+
+
+def main():
+    """ Description: Implement a main function that takes no arguments and
+                     returns nothing.
+
+        The function will obtain a database connection using get_db and
+        retrieve all rows in the users table and display each row under a
+        filtered format
+    """
+    database = get_db()
+    cursor = database.cursor()
+    cursor.execute("SELECT * FROM users;")
+    fields = [i[0] for i in cursor.description]
+
+    log = get_logger()
+
+    for row in cursor:
+        str_row = ''.join(f'{f}={str(r)}; ' for r, f in zip(row, fields))
+        log.info(str_row.strip())
+
+    cursor.close()
+    database.close()
+
+
+if __name__ == '__main__':
+    main()
