@@ -2,6 +2,7 @@
 """ 0. Regex-ing: filter_datum
     1. Log formatter: logging
     2. Create logger: get_logger
+    3. Connect to secure database - get_db
 """
 
 import re
@@ -73,3 +74,15 @@ def get_logger() -> logging.Logger:
     log.addHandler(sh)
 
     return log
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """ Description: Implement a get_db function that returns a connector to the database 
+                     (mysql.connector.connection.MySQLConnection object). """
+    connection_db = mysql.connector.connection.MySQLConnection(
+        username = getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
+        password = getenv('PERSONAL_DATA_DB_PASSWORD', ''),
+        host = getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
+        database = getenv('PERSONAL_DATA_DB_NAME')
+    )
+
+    return connection_db
