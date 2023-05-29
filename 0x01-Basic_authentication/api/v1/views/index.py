@@ -33,3 +33,12 @@ def test_unauthorized() -> str:
       - the API error as JSON
     """
     return abort(401)
+
+
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def test_forbidden() -> str:
+    """ GET /api/v1/forbidden
+    Return:
+      - the API error as JSON
+    """
+    return abort(403)
