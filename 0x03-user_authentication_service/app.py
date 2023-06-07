@@ -118,9 +118,9 @@ def update_password() -> str:
         - 200 and JSON Payload if valid
     """
     try:
-        email = request.form['email']
-        reset_token = request.form['reset_token']
-        new_password = request.form['new_password']
+        email = request.form["email"]
+        reset_token = request.form["reset_token"]
+        new_password = request.form["new_password"]
     except KeyError:
         abort(400)
 
