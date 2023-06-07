@@ -119,7 +119,7 @@ def update_password() -> str:
     """
     try:
         email = request.form['email']
-        reset_token = request.form["reset_token"]
+        reset_token = request.form['reset_token']
         new_password = request.form['new_password']
     except KeyError:
         abort(400)
