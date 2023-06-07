@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Flask Route module """
 
-from flask import Flask, jsonify, request, abort, redirect, make_response
+from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth
 
 app = Flask(__name__)
@@ -122,7 +122,7 @@ def update_password() -> str:
         reset_token = request.form['reset_token']
         new_password = request.form['new_password']
     except KeyError:
-        abort(400)
+        abort(403)
 
     try:
         AUTH.update_password(reset_token, new_password)
