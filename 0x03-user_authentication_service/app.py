@@ -3,6 +3,7 @@
 
 from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth
+from sqlalchemy.orm.exc import NoResultFound
 
 app = Flask(__name__)
 AUTH = Auth()
@@ -122,7 +123,7 @@ def update_password() -> str:
         reset_token = request.form['reset_token']
         new_password = request.form['new_password']
     except KeyError:
-        abort(403)
+        abort(400)
 
     try:
         AUTH.update_password(reset_token, new_password)
